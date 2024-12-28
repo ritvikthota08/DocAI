@@ -1,33 +1,40 @@
-# Quick Rundown of virtual environment for future backend members
-    # You must make your own virtual environment if you have already not
-    # Please look here: https://www.geeksforgeeks.org/create-virtual-environment-using-venv-python/
-    # before starting on this file for the backend
+# Quick Rundown for first time in backend
 
-# Overview of API
+    # VIRTUAL ENVIRONMENT SETUP
+        # You must make your own virtual environment if you have already not
+        # Please look here: https://www.geeksforgeeks.org/create-virtual-environment-using-venv-python/
+        # before starting on this file for the backend
+    
+    # DOWNLOAD MODULES FOR BACKEND
+        # Make sure to download the dotenv module for getting the environment(env) file
+        # and the OpenAI module to get API instance for app use
+        # OPTIONAL: You can download Ollama to use and experiment with the AI responses as well
+        # Look here for that -> https://www.youtube.com/watch?v=EBUMxu2hl34
 
-
-# import flask module
+#import of os, dotenv, Flask, and OpenAI modules
+import os
+from dotenv import load_dotenv, find_dotenv
 from flask import Flask, render_template
-
-#import OpenAI module
 from openai import OpenAI
 
+#Finds and loads api key
+_ = load_dotenv(find_dotenv())
 base_url = "https://api.aimlapi.com"
-api_key = "903022bf2dc24041b00d0afd1c3d337b"
+api_key = os.environ.get('GPT_API_KEY')
 
 # Prompt to set up the ai assistant
-system_prompt = "You are an ai assistant for doctors. Help in diagnoses and suggest possible ways to help a person get better with their health problems"
+system_prompt = "You are an assistant for doctors. Help in diagnoses and suggest possible ways to help a person get better with their health problems"
 
 # Prompt to set up the user's input
 user_prompt = "A patient of mine told me they have had severe depressive episodes in the past couple of months. What treatments should I give them to help with these episodes?"
 
-# api
+# API instance to call API functions
 api = OpenAI(api_key=api_key, base_url=base_url)
 
 completion = api.chat.completions.create(
         model="mistralai/Mistral-7B-Instruct-v0.2",
         messages=[
-            {"role": "system", "content": system_prompt},
+            {"role": "assistant", "content": system_prompt},
             {"role": "user", "content": user_prompt},
         ],
         temperature=0.7,
@@ -50,7 +57,7 @@ def test():
 # route to log in or register for DocAI
 # may need to seperate and create different routes and pages of log in and registration
 # for better organization of different web pages
-@app.route("/log in")
+@app.route("/login")
 def logInAndRegistration():
     return "Log in and registration page of DocAI"
 
