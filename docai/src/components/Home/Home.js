@@ -8,7 +8,10 @@ const Home = () => {
     <div className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-800 text-white overflow-x-hidden w-full m-0 p-0">
       <div className="container mx-auto px-4 py-6">
         <div className="flex justify-between items-center">
-          <button className="px-4 py-2 text-sm md:text-base bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg">
+          <button 
+            onClick={() => navigate("/about")}
+            className="px-4 py-2 text-sm md:text-base bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-lg"
+          >
             About
           </button>
 

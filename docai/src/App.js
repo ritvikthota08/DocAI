@@ -5,6 +5,7 @@ import LoginPage from './components/Login/Login';
 import ResetPassword from './components/ResetPassword/ResetPassword';
 import CreateAccount from './components/CreateAccount/CreateAccount';
 import DiagnosisForm from './components/DiagnosisForm/DiagnosisForm';
+import About from './components/About/About';  // Add this import
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/create-account" element={<CreateAccount />} />
         <Route path="/diagnose" element={<DiagnosisForm />} />
-        <Route path="/" element={<Navigate to="/home" />} />  {}
+        <Route path="/about" element={<About />} />  {/* Add this route */}
+        <Route path="/" element={<Navigate to="/home" />} />
       </Routes>
     </BrowserRouter>
   );
