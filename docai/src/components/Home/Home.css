@@ -1,3 +1,97 @@
-.buttons {
+/* Home.css */
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Align items starting from the top */
+    background: linear-gradient(to bottom, #1a237e, #1e3799);
+    color: white;
+    overflow: hidden; /* Prevent unwanted scrolling */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.nav-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 4rem; /* Space below nav-container */
     text-align: center;
+}
+
+h1 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin: 0;
+}
+
+.diagnose-container {
+    margin-top: 2rem;
+}
+
+.custom-button1,
+.custom-button2,
+.custom-button3 {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    border: none;
+    white-space: nowrap;
+}
+
+.custom-button1 {
+    background-color: #2962ff;
+}
+
+.custom-button2 {
+    background-color: #2962ff;
+}
+
+.custom-button3 {
+    background-color: #b129ff;
+    padding: 20px 40px;
+    font-size: 1.25rem;
+    border-radius: 30px;
+}
+
+.custom-button1:hover,
+.custom-button2:hover,
+.custom-button3:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 768px) {
+    .nav-container {
+        padding: 0.5rem;
+    }
+
+    .custom-button1,
+    .custom-button2 {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+
+    .custom-button3 {
+        padding: 15px 30px;
+        font-size: 1rem;
+        border-radius: 20px;
+    }
 }
