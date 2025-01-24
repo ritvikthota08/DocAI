@@ -1,29 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { 
-  Bot,
-  Menu,
-  UserCircle,
-  MessageCircle,
-  Maximize,
-  MapPin,
-  MessageSquare,
-  HelpCircle,
-  Mail
-} from 'lucide-react';
+import { Bot, Menu, UserCircle, MessageCircle, Maximize, MapPin, MessageSquare, HelpCircle, Mail } from 'lucide-react';
 import './DiagnosisForm.css';
 
 const DiagnosisForm = () => {
   const navigate = useNavigate();
-  const [symptoms, setSymptoms] = useState('');
-  const [diagnosis, setDiagnosis] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [messages, setMessages] = useState([
+    { type: 'bot', content: 'Hello! I\'m DocAI. Please describe your symptoms and I\'ll help analyze them.' }
+  ]);
+  const [currentMessage, setCurrentMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError('');
+    if (!currentMessage.trim()) return;
+
+    // Add user message
+    setMessages(prev => [...prev, { type: 'user', content: currentMessage }]);
+    setCurrentMessage('');
+    setIsLoading(true);
 
     try {
       const response = await fetch('http://localhost:3001/api/diagnose', {
@@ -31,7 +35,7 @@ const DiagnosisForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ symptoms }),
+        body: JSON.stringify({ symptoms: currentMessage }),
       });
 
       const data = await response.json();
@@ -40,33 +44,23 @@ const DiagnosisForm = () => {
         throw new Error(data.error || 'Failed to get diagnosis');
       }
 
-      setDiagnosis(data.diagnosis);
+      // Add bot response
+      setMessages(prev => [...prev, { type: 'bot', content: data.diagnosis }]);
     } catch (err) {
-      console.error('Error details:', err);
-      setError('Error: ' + err.message);
+      console.error('Error:', err);
+      setMessages(prev => [...prev, { 
+        type: 'bot', 
+        content: 'I apologize, but I encountered an error analyzing your symptoms. Please try again.' 
+      }]);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
-  };
-
-  const handleLogoClick = () => {
-    navigate('/home');
   };
 
   return (
     <div className="create-account-container">
       <header className="header">
-        <div 
-          className="logo-container" 
-          onClick={handleLogoClick}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              handleLogoClick();
-            }
-          }}
-        >
+        <div className="logo-container" onClick={() => navigate('/home')}>
           <Bot size={40} className="robot-icon" />
           <span className="logo-text">DocAI</span>
         </div>
@@ -90,42 +84,43 @@ const DiagnosisForm = () => {
       </nav>
 
       <main className="main-content">
-        <div className="form-container">
-          <h1>AI Symptom Analysis</h1>
-          
-          <form onSubmit={handleSubmit} className="diagnosis-form">
-            <div className="input-group">
-              <label>Describe your symptoms</label>
-              <textarea
-                value={symptoms}
-                onChange={(e) => setSymptoms(e.target.value)}
-                placeholder="Please describe your symptoms in detail..."
-                className="symptom-textarea"
-                required
-              />
-            </div>
+        <div className="chat-container">
+          <div className="messages-container">
+            {messages.map((message, index) => (
+              <div key={index} className={`message ${message.type}`}>
+                <div className="message-content">
+                  {message.type === 'bot' && <Bot size={20} className="message-icon" />}
+                  <p>{message.content}</p>
+                </div>
+              </div>
+            ))}
+            {isLoading && (
+              <div className="message bot">
+                <div className="message-content">
+                  <Bot size={20} className="message-icon" />
+                  <p>Analyzing symptoms...</p>
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
 
+          <form onSubmit={handleSubmit} className="chat-input-form">
+            <input
+              type="text"
+              value={currentMessage}
+              onChange={(e) => setCurrentMessage(e.target.value)}
+              placeholder="Describe your symptoms..."
+              className="chat-input"
+            />
             <button 
               type="submit"
-              disabled={loading}
-              className="create-account-button"
+              disabled={isLoading || !currentMessage.trim()}
+              className="send-button"
             >
-              {loading ? 'Analyzing...' : 'Get Diagnosis'}
+              Send
             </button>
           </form>
-
-          {error && (
-            <div className="error-message">
-              {error}
-            </div>
-          )}
-
-          {diagnosis && (
-            <div className="diagnosis-result">
-              <h3>AI Diagnosis:</h3>
-              <p>{diagnosis}</p>
-            </div>
-          )}
         </div>
       </main>
     </div>

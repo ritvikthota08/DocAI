@@ -1,0 +1,153 @@
+/* History.css */
+.screen {
+    background: #1e3799;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.history-main {
+    padding: 2rem;
+    padding-top: 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.history-main h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
+.history-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.history-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s;
+}
+
+.history-card:hover {
+    transform: translateY(-2px);
+}
+
+.history-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.date-time {
+    color: white;
+}
+
+.date {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-right: 1rem;
+}
+
+.time {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.review-button {
+    background: #4F46E5;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.review-button:hover {
+    background: #4338CA;
+}
+
+.history-card-content {
+    color: white;
+}
+
+.symptoms-section, .diagnosis-section {
+    margin-bottom: 1rem;
+}
+
+.symptoms-section h3, .diagnosis-section h3 {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.symptoms-section p, .diagnosis-section p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+}
+
+/* Keep your existing nav styles */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(30, 55, 153, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-button {
+    background-color: #2962ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-button.active {
+    background-color: #1e40af;
+}
+
+.nav-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .history-main {
+        padding: 1rem;
+        padding-top: 80px;
+    }
+
+    .history-card {
+        padding: 1rem;
+    }
+
+    .history-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .nav-button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}

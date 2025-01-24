@@ -1,40 +1,68 @@
+// src/components/Home/Home.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './Home.css';
 
 const Home = () => {
   const navigate = useNavigate();
+  const { isLoggedIn, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   return (
-    <div className="container">
-      <div className="nav-container">
+    <div className="screen">
+      <nav className="nav">
         <button 
           onClick={() => navigate("/about")}
-          className="custom-button1"
+          className="nav-button"
         >
           About
         </button>
-
-        <button 
-          onClick={() => navigate("/login")}
-          className="custom-button2"
-        >
-          Login | Sign Up
-        </button>
-      </div>
-
-      <div className="content-wrapper">
-        <h1>Chat With DocAI</h1>
         
-        <div className="diagnose-container">
+        {isLoggedIn ? (
+          <div className="auth-buttons">
+            <button 
+              onClick={() => navigate("/history")}
+              className="nav-button"
+            >
+              History
+            </button>
+            <button 
+              onClick={() => navigate("/profile")}
+              className="nav-button"
+            >
+              Profile
+            </button>
+            <button 
+              onClick={handleLogout}
+              className="nav-button"
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
           <button 
-            onClick={() => navigate("/diagnose")}
-            className="custom-button3"
+            onClick={() => navigate("/login")}
+            className="nav-button"
           >
-            DOCAI DIAGNOSE TOOL
+            Login | Sign Up
           </button>
-        </div>
-      </div>
+        )}
+      </nav>
+
+      <main className="main">
+        <h1>Chat With DocAI</h1>
+        <button 
+          onClick={() => navigate("/diagnose")}
+          className="diagnose-button"
+        >
+          DOCAI DIAGNOSE TOOL
+        </button>
+      </main>
     </div>
   );
 };
