@@ -63,19 +63,6 @@ const CreateAccount = () => {
         </nav>
       </header>
 
-      <nav className="side-nav">
-        <Menu size={24} strokeWidth={1.5} />
-        <div className="side-nav-icons">
-          <UserCircle size={24} strokeWidth={1.5} />
-          <MessageCircle size={24} strokeWidth={1.5} />
-          <Maximize size={24} strokeWidth={1.5} />
-          <MapPin size={24} strokeWidth={1.5} />
-          <MessageSquare size={24} strokeWidth={1.5} />
-          <HelpCircle size={24} strokeWidth={1.5} />
-          <Mail size={24} strokeWidth={1.5} />
-        </div>
-      </nav>
-
       <main className="main-content">
         <div className="form-container">
           <h1>Create Your Account</h1>

@@ -24,7 +24,7 @@ router.post('/diagnose', async (req, res) => {
                 messages: [
                     {
                         role: "system",
-                        content: "You are a medical diagnosis assistant. Analyze the following symptoms and provide a preliminary analysis. Always include disclaimers about consulting healthcare professionals."
+                        content: "You are a medical diagnosis assistant. Analyze the following symptoms and provide a preliminary analysis. Ask follow up questions about symptoms such as how severe the symptoms are and how long they have persisted for. Provide possible explanations. Always include disclaimers about consulting healthcare professionals. Make messages shorter and more consice.ç"
                     },
                     {
                         role: "user",
@@ -32,7 +32,7 @@ router.post('/diagnose', async (req, res) => {
                     }
                 ],
                 temperature: 0.7,
-                max_tokens: 512
+                max_tokens: 1024
             })
         });
 

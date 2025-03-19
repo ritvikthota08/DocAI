@@ -9,11 +9,17 @@ import Profile from './components/Profile/Profile';
 import History from './components/History/History';  // Add this import
 import { AuthProvider } from './context/AuthContext';
 import About from './components/About/About';
+import PharmacyFinder from './components/PharmacyFinder/PharmacyFinder';
+import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+      <div className="app-container">
+        <Dashboard />
+        <main className="main-content"></main>
+      </div>
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
@@ -24,6 +30,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/history" element={<History />} />  {/* Add this route */}
           <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/pharmacyfinder" element={<PharmacyFinder />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

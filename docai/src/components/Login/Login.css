@@ -1,40 +1,41 @@
+/* Login Page Styles - Fixes Whitespace Issues */
+
 .create-account-container {
   min-height: 100vh;
+  width: 100vw; /* Full width */
   background-color: #1a1464;
   color: white;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: relative;
+  margin-left: 0; /* Remove extra left margin */
+  transition: margin-left 0.3s ease;
+}
+
+/* Adjust when dashboard is open */
+.dashboard.open + .main-content .create-account-container {
+  margin-left: 180px; /* Adjust sidebar width */
+  width: calc(100vw - 180px); /* Prevents overflow */
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  padding: 1.5rem;  /* Changed from 2rem */
-  padding-left: 0;  /* Add this line */
+  padding: 1.5rem;
 }
 
+/* Hide the original logo */
 .logo-container {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.robot-icon {
-  color: #9ca3af;
-}
-
-.logo-text {
-  font-weight: bold;
-  font-size: 1.25rem;
-  color: #9ca3af;
+  display: none;
 }
 
 .top-nav {
   display: flex;
   gap: 2rem;
-  margin-right: 5rem;
+  margin-right: 2rem;
 }
 
 .top-nav a {
@@ -43,46 +44,23 @@
   font-size: 1rem;
 }
 
-.side-nav {
-  position: fixed;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 64px;
-  background-color: #e8e0ff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1.5rem 0;
-  gap: 3rem;
-}
-
-.side-nav-icons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-}
-
-.side-nav svg {
-  color: #1a1464;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.side-nav svg:hover {
-  opacity: 0.8;
-}
-
+/* Remove extra padding from main-content */
 .main-content {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-right: 64px;
+  width: 100%;
+  padding: 0;
 }
 
+/* Remove whitespace caused by side navigation */
+.side-nav {
+  display: none;
+}
+
+/* Form container alignment */
 .form-container {
   width: 100%;
   max-width: 28rem;
@@ -92,55 +70,35 @@
   align-items: center;
 }
 
-h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.input-group {
-  width: 100%;
-  margin-bottom: 1.5rem;
-}
-
-.input-group label {
-  display: block;
-  font-size: 0.875rem;
-  margin-bottom: 0.5rem;
-}
-
-.input-with-icon {
-  position: relative;
-  width: 100%;
-}
-
-.input-icon {
-  position: absolute;
-  left: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #6b7280;
-}
-
-input[type="text"],
+/* Input field styling */
+input[type="text"], 
 input[type="password"] {
   width: 100%;
   padding: 1rem;
   padding-left: 2.5rem;
-  background-color: #f3f4f6;
-  border: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
-  color: #1f2937;
+  color: white;
   font-size: 1rem;
 }
 
+input[type="text"]::placeholder, 
+input[type="password"]::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.input-icon {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Button styling */
 .create-account-button {
   width: 100%;
   padding: 1rem;
-  background-color: transparent;
+  background-color: #3f51b5;
   color: white;
-  border: 1px solid white;
+  border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 1rem;
@@ -149,27 +107,25 @@ input[type="password"] {
 }
 
 .create-account-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #5c6bc0;
 }
 
-..logo-container {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  transition: opacity 0.2s;
-  margin-left: 1rem;  /* Add this line */
+/* Responsive Fixes */
+@media (max-width: 768px) {
+  .create-account-container {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .main-content {
+    width: 100%;
+    padding: 0;
+  }
+
+  body nav.side-nav,
+div.create-account-container nav.side-nav,
+nav.side-nav:not(.left-nav) {
+  display: none !important;
 }
 
-.logo-container:hover {
-  opacity: 0.8;
-}
-
-.create-account-container {
-  min-height: 100vh;
-  background-color: #1a1464;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  position: relative;
 }

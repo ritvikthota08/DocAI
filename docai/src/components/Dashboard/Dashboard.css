@@ -1,0 +1,113 @@
+    .dashboard {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        background: #1a237e;
+        color: white;
+        transition: width 0.3s ease;
+        width: 60px;
+        overflow: hidden;
+        z-index: 1000;
+      }
+      
+      .dashboard.open {
+        width: 240px;
+      }
+      
+      .hamburger {
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        margin: 10px;
+      }
+      
+      .hamburger span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: white;
+        margin: 4px 0;
+        transition: 0.3s;
+      }
+      
+      .open .hamburger span:first-child {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      
+      .open .hamburger span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .open .hamburger span:last-child {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+      
+      .menu {
+        padding: 20px 0;
+      }
+      
+      .menu-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        color: white;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        white-space: nowrap;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      
+      .menu-item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      
+      .menu-item.active {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      
+      .icon {
+        width: 24px;
+        margin-right: 16px;
+        text-align: center;
+      }
+      
+      .label {
+        font-size: 16px;
+      }
+      
+      @media (max-width: 768px) {
+        .dashboard.open {
+          width: 100%;
+        }
+      
+        .dashboard.open + .main-content {
+          margin-left: 0; 
+        }
+      }
+      
+      /* Add this to your Dashboard.css file */
+.dashboard:not(.open) .label {
+    display: none;
+  }
+  
+  /* Ensure the icons are centered when collapsed */
+  .dashboard:not(.open) .menu-item {
+    justify-content: center;
+    padding: 12px 0;
+  }
+  
+  /* Remove right margin from icons when collapsed */
+  .dashboard:not(.open) .icon {
+    margin-right: 0;
+  }
+
+  
